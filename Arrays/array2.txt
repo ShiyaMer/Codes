@@ -1,0 +1,144 @@
+1)Rotate the array by 1 place
+def rotateArray(arr: [], n: int) -> []:
+    a=arr[0]
+    for i in range(n-1):
+        arr[i]=arr[i+1]
+    arr[n-1]=a 
+    return arr   
+2)Rotate array by k places
+Brute Force:
+def rotateArray(arr: list, k: int) -> list:
+    n=len(arr)
+    while(k):
+        a=arr[0]
+        for i in range(n-1):
+            arr[i]=arr[i+1]
+        arr[n-1]=a
+        k=k-1
+    return arr    
+Better:time=O(n+d) space=o(d)
+def rotateArray(arr: list, k: int) -> list:
+    n=len(arr)
+    d=k%n
+    if d==0:
+        return arr
+    temp=[]
+    for i in range(d):
+        temp.append(arr[i])
+    for i in range(0,n-d):
+        arr[i]=arr[i+d]
+    for i in range(n-d,n):
+        arr[i]=temp[i-n+d]    
+    return arr 
+Optimal:Space =o(1),time complexity=o(2n)
+by observation
+def reverse(arr,start,end):
+    while(start<=end):
+        temp=arr[start]
+        arr[start]=arr[end]
+        arr[end]=temp
+        start+=1
+        end-=1
+def rotateArray(arr: list, k: int) -> list:
+    n=len(arr)
+    d=k%n
+    if d==0:
+        return arr
+    reverse(arr,0,d-1)
+    reverse(arr,d,n-1)
+    reverse(arr,0,n-1)
+    return arr
+3)Move Zeros to Right
+#Brute force is extra space
+def moveZeros(n: int,  a: [int]) -> [int]:
+    #i=n-1
+    #b=n-1#pointer to nearest zero
+    #while(i>=0):
+    #    if a[i]==0:
+    #        #left rotate the array by 1 till zero is last
+    #        for j in range(i,b):
+    #            a[j]=a[j+1]
+    #        a[b]=0
+    #        b=b-1    
+    #    i=i-1    
+    #return a
+    i=-1
+    for j in range(n):
+        if a[j]==0:
+            i=j
+            break
+    if i==-1:
+        return a
+    for k in range(i+1,n):
+        if a[k]!=0:
+            a[i],a[k]=a[k],a[i]
+            i+=1
+    return a
+4)Union of 2 lists
+brute:2nlogn space m+n
+def sortedArray(a: [int], b: [int]) -> [int]:
+    arr=set(a+b)
+    arr=list(arr)
+    arr.sort()
+    return arr  
+optimal:o(m+n) space:m+n
+def sortedArray(a: [int], b: [int]) -> [int]:
+    i=0
+    j=0
+    arr=[]
+    while(i<len(a)and j<len(b)):
+        if a[i]<=b[j]:
+            if (len(arr)==0 or arr[-1]!=a[i]):
+                arr.append(a[i])
+            i+=1
+        else:
+            if(len(arr)==0 or arr[-1]!=b[j]):
+                arr.append(b[j])
+            j+=1
+    while(j<len(b)):
+        if arr[-1]!=b[j]:
+            arr.append(b[j])
+        j+=1
+    while(i<len(a)):
+        if arr[-1]!=a[i]:
+            arr.append(a[i])
+        i+=1
+    return arr        
+5)Intersection of 2 arrays
+1)brute force o(n*m) space o(k+m)
+def findArrayIntersection(arr: list, n: int, brr: list, m: int):
+    visited=[0]*len(brr)
+    h=[]
+    for i in range(n):
+        for j in range(m):
+            if arr[i]==brr[j] and visited[j]==0:
+                h.append(arr[i])
+                visited[j]=1
+                break
+            elif brr[j]>arr[i]:
+                break    
+    return h           
+2)Optimal
+
+def findArrayIntersection(arr: list, n: int, brr: list, m: int):
+    i=0
+    j=0
+    ar=[]
+    while(i<n and j<m):
+        if arr[i]<brr[j]:
+            i+=1
+        elif brr[j]<arr[i]:
+            j+=1
+        elif arr[i]==brr[j]:
+            ar.append(arr[i])
+            i+=1
+            j+=1
+    return ar 
+
+
+
+
+
+
+
+
