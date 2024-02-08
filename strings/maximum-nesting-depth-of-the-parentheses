@@ -1,1 +1,40 @@
-B
+Brute Force:
+class Solution(object):
+    def maxDepth(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if s=="":
+            return 0
+        count=0
+        val=0
+        maxi=0
+        stack=[]
+        for i in s:
+            if i=='(':
+                stack.append(i)
+            elif i==')':
+                maxi=max(maxi,len(stack))  
+                stack.pop(-1)  
+        return maxi     
+Optimal:
+class Solution(object):
+    def maxDepth(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+        if s=="":
+            return 0
+        count=0
+        maxi=0
+        for i in s:
+            if i=='(':
+                count+=1
+                maxi=max(maxi,count)
+            elif i==')':
+                count-=1 
+        return maxi     
+
+        
