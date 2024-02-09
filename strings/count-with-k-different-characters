@@ -1,0 +1,36 @@
+Brute:
+def countSubStrings(s: str, k: int) -> int:
+    count=0
+    for i in range(len(s)):
+        a=set()
+        for j in range(i,len(s)):
+            a.add(s[j])  
+            if len(a)==k:
+                count+=1   
+            elif len(a)>k:
+                break      
+    return count  
+Optimal:
+from typing import *
+#intuition atmost k-atmost k-1=k
+def helper(s,k):
+    d={}
+    left=0
+    dis=0
+    count=0
+    for i in range(len(s)):
+        d[s[i]]=d.get(s[i],0)+1
+        if d[s[i]]==1:#I FOUND DISTINCT ELEMENT
+            dis+=1
+        while(dis>k):#TRY REMOVING ONE ELEMENT TO ACCCOUNT FOR THE OTHER SUBARRAYS
+            d[s[left]]-=1
+            if d[s[left]]==0:
+                d.pop(s[left])
+                dis-=1
+            left+=1
+        count+=i-left+1 
+    return count           
+
+
+def countSubStrings(s: str, k: int) -> int:     
+    return helper(s,k)-helper(s,k-1)  
