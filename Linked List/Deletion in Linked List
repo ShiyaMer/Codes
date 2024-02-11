@@ -1,0 +1,41 @@
+Head Deletion:
+def deleteHead(head: Optional[Node]) -> Optional[Node]:
+    if head==None:
+        return head
+    if head.next==None:
+        head=None
+        return head
+    else:
+        head=head.next
+        return head        
+Tail Deletion:
+def deleteLast(list: Node) -> Node:
+    if list==None or list.next==None:
+        return None
+    else:
+        p=list
+        while(p.next.next!=None):
+            p=p.next
+        p.next=None
+        return list 
+Between Deletion:
+def deleteNode(head, pos) :
+    if head==None:
+        return None
+    if pos==0:
+        head=head.next
+        return head
+    n=0 
+    p=head   
+    while p.next!=None:  
+        n+=1
+        p=p.next  
+    if pos>=n:
+        return head    
+    count=0
+    p=head
+    while(count!=pos-1):
+        count+=1
+        p=p.next
+    p.next=p.next.next
+    return head
