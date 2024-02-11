@@ -1,0 +1,9 @@
+def searchInLinkedList(head, k):
+    ans=0
+    p=head
+    while(p!=None):
+        if p.data==k:
+            ans=1
+            break
+        p=p.next    
+    return ans      
