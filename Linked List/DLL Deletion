@@ -1,0 +1,61 @@
+class Node:
+    def __init__(self, prev: Optional['Node'] = None, next: Optional['Node'] = None):
+        self.data = 0
+        self.prev = prev
+        self.next = next
+/*Delete Head of a Doubly Linked List*/
+def deleteHead(head: Optional[Node]) -> Optional[Node]:
+    if head==None or head.next==None:
+        return None
+    head=head.next
+    head.prev=None
+    return head
+/*Delete Last Node of a Doubly Linked List*/
+def deleteLastNode(head: Node) -> Node:
+    if head.next==None or head==None:
+        return None
+    p=head
+    while(p.next.next!=None):
+        p=p.next
+    p.next=None
+    return head    
+/*Delete K-th Node from Doubly Linked List*/
+def deleteNode(head: Optional[Node], k: int) -> Optional[Node]:
+    if head==None or head.next==None:
+        return None
+    if k==1:
+        head=head.next
+        head.prev=None
+        return head
+    p=head
+    n=1  
+    while(p.next!=None):
+        n+=1 
+        p=p.next
+    if n==k:
+        p=head
+        while(p.next.next!=None):
+            p=p.next
+        p.next=None
+        return head
+    count=1
+    p=head
+    while(count!=k-1):
+        p=p.next
+        count+=1
+    temp=p
+    p.next=p.next.next
+    p.next.prev=temp
+    return head    
+
+/*Delete node from Doubly Linked List*/
+def deleteNode(node: Node) -> None:
+    p=node
+    if p.next==None:
+        p.prev.next=None
+        p.prev=None
+        return
+    p.prev.next=p.next
+    p.next.prev=p.prev
+    return
+       
