@@ -1,0 +1,80 @@
+class Node:
+    def __init__(self, value = 0, prev = None, next = None):
+        self.value = value
+        self.prev = prev
+        self.next = next
+/*insert-at-end-of-doubly-linked-list*/
+
+def insertAtFront(head: Optional[Node], k: int) -> Node:
+    x=Node(k)
+    p=x
+    if head==None:
+        return x
+    x.next=head
+    head.prev=x
+    return p
+
+/*Insert before the tail of a Doubly Linked List*/
+def insertBeforeTail(head: Node, k: int) -> Node:
+    if head==None:
+        x=Node(k)
+        return x
+    if head.next==None:
+        x=Node(k)
+        p=x
+        x.next=head
+        head.prev=x
+        return p 
+    x=Node(k)
+    p=head
+    while(p.next.next!=None):
+        p=p.next
+    front=p.next
+    back=p
+    p.next.prev=x
+    x.next=front
+    x.prev=back
+    p.next=x
+    return head
+/*Insert before the Kth node*/
+class Node:
+        def __init__(self,data):
+            self.data = data
+            self.next = None
+            self.prev = None
+def insert(head, k, val):
+    x=Node(val)
+    if head==None:
+        if k==1:
+            return x
+        return
+    p=head    
+    if k==1:
+        x.next=p
+        p.prev=x
+        head=x
+        return head
+        
+    n=1
+    while(n!=k-1):
+        n+=1
+        p=p.next
+    front=p.next
+    back=p
+    p.next.prev=x
+    p.next=x
+    x.prev=back
+    x.next=front 
+    return head  
+
+/*Insert at end of Doubly Linked List*/
+def insertAtTail(head: Node, k: int) -> Node:
+    x=Node(k)
+    if head==None:
+        return x
+    p=head    
+    while(p.next!=None):
+        p=p.next
+    p.next=x
+    x.prev=p
+    return head     
