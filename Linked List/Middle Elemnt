@@ -1,0 +1,25 @@
+Brute:
+def findMiddle(head):
+    if head.next==None:
+        return head
+    p=head
+    count=0
+    while(p!=None):
+        count+=1
+        p=p.next
+    m=0    
+    while(m!=count//2):
+        head=head.next
+        m+=1
+    return head    
+Optimal:
+def findMiddle(head):
+    slowTemp = head
+    fastTemp = head
+    while fastTemp.next!=None:
+        slowTemp = slowTemp.next
+        if fastTemp.next.next == None:
+            break
+        fastTemp = fastTemp.next.next
+    return slowTemp
+         
