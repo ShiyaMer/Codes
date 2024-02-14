@@ -1,0 +1,31 @@
+Optimal:
+def firstNode(head):
+    if head.next==None or head==None:
+        return None
+    fast=head
+    slow=head
+    p=head
+    while(fast!=None and fast.next!=None):
+        slow=slow.next
+        fast=fast.next.next 
+        if slow==fast:
+            while(p!=slow):
+                p=p.next
+                slow=slow.next
+            return slow
+    return None        
+Brute:
+def firstNode(head):
+    if head.next==None or head==None:
+        return None
+    fast=head    
+    d=set()  
+    count=0 
+    while(fast!=None):
+        if fast not in d:
+            d.add(fast)
+        else:
+            return fast
+        fast=fast.next    
+                    
+    return None        
