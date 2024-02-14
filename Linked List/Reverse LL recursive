@@ -1,0 +1,8 @@
+def reverseLinkedList(head):
+    if head is None or head.next is None:
+        return head
+    new_head=reverseLinkedList(head.next) 
+    front=head.next#front is that elemnt
+    front.next=head
+    head.next=None
+    return new_head  
