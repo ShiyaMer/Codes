@@ -1,0 +1,13 @@
+Brute:
+separate linked list insertion at head
+Optimal:
+
+def reverseLinkedList(head):
+    temp=None
+    curr=head
+    while(curr):
+        prev=curr.next
+        curr.next=temp
+        temp=curr
+        curr=prev
+    return temp   
