@@ -1,0 +1,44 @@
+Brute:
+def lengthOfLoop(head: Node) -> int:
+    if head==None or head.next==None:
+        return 0
+
+    slow=head
+    fast=head
+    p=head
+    while(fast!=None and fast.next!=None):
+        slow=slow.next
+        fast=fast.next.next
+        if slow==fast:
+            while(p!=slow):
+                slow=slow.next
+                p=p.next
+            count=1
+            #print(count)
+            slow=slow.next
+            while(p!=slow):
+                slow=slow.next
+                count+=1
+                #print(count)
+            return count 
+    return 0               
+Optimal:
+def lengthOfLoop(head: Node) -> int:
+    if head==None or head.next==None:
+        return 0
+
+    slow=head
+    fast=head
+    p=head
+    while(fast!=None and fast.next!=None):
+        slow=slow.next
+        fast=fast.next.next
+        if slow==fast:
+            count=1
+            fast=fast.next
+            while(fast!=slow):
+                count+=1
+                fast=fast.next
+            return count 
+    return 0               
+
