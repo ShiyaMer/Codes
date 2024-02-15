@@ -1,0 +1,45 @@
+Brute:
+def isPalindrome(head):
+    if head.next==None or head==None:
+        return True
+    l=[]
+    p=head
+    while(p!=None):
+        l.append(p.data)
+        p=p.next   
+    j=len(l)-1
+    i=0
+    while(i<=j):
+        if l[i]!=l[j]:
+            return False
+        i+=1
+        j-=1
+    return True          
+Optimal:
+def reverse(head):
+    if head==None or head.next==None:
+        return head
+    new_head=reverse(head.next)
+    front=head.next
+    front.next=head
+    head.next=None
+    return new_head    
+def isPalindrome(head): 
+    if head.next==None or head==None:
+        return True
+    slow=head
+    fast=head
+    while(fast and fast.next):
+        fast=fast.next.next
+        slow=slow.next
+    new_head=reverse(slow.next)
+    p=head
+    q=new_head
+    while(q!=None):
+        if p.data!=q.data:
+            return False
+        p=p.next
+        q=q.next
+    return True    
+
+                    
