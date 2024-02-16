@@ -1,0 +1,37 @@
+Optimal:
+def removeKthNode(head, k):
+    if head==None:
+        return None
+    fast=head   
+    slow=head 
+    for i in range(k):
+        fast=fast.next
+    if fast==None:
+        head=head.next
+        return head
+    while(fast.next):
+        slow=slow.next
+        fast=fast.next
+    slow.next=slow.next.next
+    return head            
+Brute:
+def removeKthNode(head, k):
+    if head==None:
+        return None
+     
+    n=0
+    p=head
+    while (p):
+        p=p.next
+        n+=1
+    start=n-k
+    if start==0:
+        head=head.next
+        return head   
+    l=1
+    q=head
+    while(l!=start):
+        l+=1
+        q=q.next
+    q.next=q.next.next    
+    return head  
