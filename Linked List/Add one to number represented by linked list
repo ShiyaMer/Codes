@@ -1,0 +1,67 @@
+Brute:
+class Node:
+    def __init__(self, data=0, next=None):
+        self.data = data
+        self.next = next
+
+
+# Don't change the code above.
+
+
+def addOne(head: Node) -> Node:
+    st=""
+    p=head
+    while(p):
+        st+=str(p.data)
+        p=p.next
+    st2=str(int(st)+1) 
+    if len(st2)>len(st):
+        a=Node(int(st2[0]))
+        a.next=head
+        head=a
+    p=head
+    i=0
+    while(p):
+        if p.data!=int(st2[i]):
+            p.data=st2[i]
+        p=p.next
+        i=i+1           
+    return head    
+Optimal:
+class Node:
+    def __init__(self, data=0, next=None):
+        self.data = data
+        self.next = next
+
+
+# Don't change the code above.
+
+def reverse(head):
+    if head.next==None or head==None:
+        return head
+    new_head=reverse(head.next)
+    front=head.next
+    front.next=head
+    head.next=None
+    return new_head
+    
+def addOne(head: Node) -> Node:
+    while(head.data==0):
+        head=head.next
+    new_head=reverse(head)
+    q=new_head
+    carry=1
+    while(q):
+        sum1=q.data+carry
+        carry=sum1//10
+        q.data=sum1%10
+        q=q.next
+    ans=reverse(new_head)
+    if carry!=0:
+        #print(carry)
+        a=Node(carry)
+        a.next=ans
+        return a
+
+    return ans        
+
