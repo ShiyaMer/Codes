@@ -1,0 +1,35 @@
+def segregateEvenOdd(head):
+    
+    even=None
+    odd=None
+    if head.next==None or head==None:
+        return head       
+    p=head  
+    e=even
+    o=odd  
+    while(p):
+        q=Node(p.data)
+        if (p.data)%2==0:
+            if e==None:
+                e=q
+                even=e  
+            else:
+                e.next=q
+                e=e.next    
+        else:
+            if o==None:
+                o=q
+                odd=o
+            else:
+                o.next=q
+                o=o.next
+        p=p.next    
+    
+    k=even
+    while(k.next):
+        k=k.next
+    while(odd):
+        k.next=odd
+        odd=odd.next
+        k=k.next
+    return even           
