@@ -1,0 +1,61 @@
+Brute:
+def sortList(head):
+    d={0:0,1:0,2:0}
+    p=head
+    while(p):
+        d[p.data]+=1
+        p=p.next
+    p=head
+    for i in range(d[0]):
+        p.data=0
+        p=p.next  
+    for i in range(d[1]):
+        p.data=1
+        p=p.next
+    for i in range(d[2]):
+        p.data=2
+        p=p.next 
+    return head            
+    
+    
+OPtimal:
+def sortList(head):
+    s0=s1=s2=None 
+    e0=e1=e2=None
+    p=head
+    while(p):
+        if p.data==0:
+            if s0==None:
+                s0=p
+                e0=p
+            else:
+                e0.next=p
+                e0=e0.next
+        elif p.data==1:
+            if s1==None:
+                s1=p
+                e1=p
+            else:
+                e1.next=p
+                e1=e1.next
+        else:
+            if s2==None:
+                s2=p
+                e2=p
+            else:
+                e2.next=p
+                e2=e2.next
+
+        p=p.next  
+
+    if e0:
+        e0.next=s1
+    if e1:
+        e1.next=s2
+    if e2:
+        e2.next=None    
+    return s0    
+
+
+    
+    
