@@ -1,0 +1,43 @@
+Brute:
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def merge(left, right):
+    ans = Node(-1)
+    temp = ans
+    while left is not None and right is not None:
+        if left.data < right.data:
+            temp.next = left
+            left = left.next
+        else:
+            temp.next = right
+            right = right.next
+        temp = temp.next
+    if left is not None:
+        temp.next = left
+    if right is not None:
+        temp.next = right
+    ans = ans.next
+    return ans
+
+def sortList(head):
+    if head is None or head.next is None:
+        return head
+    first = head
+    slow = head
+    fast = head
+    prev = None
+    while fast is not None and fast.next is not None:
+        prev = slow
+        slow = slow.next
+        fast = fast.next.next
+
+    left = head
+    right = prev.next
+    prev.next = None
+    left = sortList(left)
+    right = sortList(right)
+    ans = merge(left, right)
+    return ans
