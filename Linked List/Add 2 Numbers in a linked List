@@ -1,0 +1,36 @@
+def addTwoNumbers(head1: Node, head2: Node) -> Node:
+    if head1==None:
+        return head2
+    if head2==None:
+        return head1    
+    n=m=0
+    p=head1
+    q=head2
+    while(p):
+        n+=1
+        p=p.next
+    while(q):
+        m+=1
+        q=q.next
+    if m>n:
+        return addTwoNumbers(head2,head1)
+    p=head1
+    q=head2
+    carry=0
+    prev=None
+    while(p):
+        if q!=None:
+            temp=p.data+q.data+carry
+        else:
+            temp=p.data+carry    
+        carry=temp//10
+        p.data=temp%10
+        prev=p
+        p=p.next
+        if q!=None:
+            q=q.next
+    if carry!=0:
+        prev.next=Node(carry)
+    return head1    
+
+
