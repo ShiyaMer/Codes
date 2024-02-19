@@ -1,0 +1,60 @@
+Brute:
+Find length
+bring them to same point
+Traverse from the same starting point till they become same
+'''
+    Time Complexity :- O(N)
+    Space Complexity :- O(1)
+    
+    Where 'N' is the maximum length of linked list.
+'''
+
+def length(head) :
+    length = 0  
+
+    while (head != None) :
+            head = head.next  
+            length+=1
+    
+    return length
+
+def findIntersection( firstHead, secondHead) :
+		
+    # Get the length of both list.
+    firstListLength = length(firstHead)
+    secondListLength = length(secondHead)  
+        
+    # Move headA and headB to the same start point.
+    while (firstListLength > secondListLength) :
+        firstHead = firstHead.next  
+        firstListLength-=1  
+    
+    
+    while (firstListLength < secondListLength) :
+        secondHead = secondHead.next  
+        secondListLength-=1
+    
+    
+    # Find the intersection until end.
+    while (firstHead != secondHead) :
+        firstHead = firstHead.next  
+        secondHead = secondHead.next  
+
+    return firstHead
+Optimal:
+Traverse Linked List if the first one ends first send it to the start of the next and vice versa at one point of time they will become similar and then return
+def findIntersection(firstHead, secondHead):
+    fh=firstHead
+    sh=secondHead
+    while(fh!=sh):
+        if fh==None:
+            fh=secondHead
+        if sh==None:
+            sh=firstHead
+        fh=fh.next
+        sh=sh.next
+
+    if fh!=None:
+        return fh
+    else:
+        return None
