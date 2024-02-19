@@ -1,0 +1,19 @@
+if list1==None:
+            return list2
+        if list2==None:
+            return list1    
+        l=ListNode(-1)
+        a=l
+        while(list1!=None and list2!=None):
+            if list1.val<=list2.val:
+                l.next=list1
+                list1=list1.next
+            else:
+                l.next=list2
+                list2=list2.next
+            l=l.next    
+        if list1:
+            l.next=list1
+        if list2:
+            l.next=list2
+        return a.next
