@@ -1,0 +1,25 @@
+def delt(Nod):
+    front=Nod.next
+    if front==None:
+        front=Nod.prev
+        front.next=None
+        return front
+    
+    back=Nod.prev
+    back.next=front
+    front.prev=back
+    return front
+def removeDuplicates(head: Node) -> Node:
+    temp=head
+    if temp.next==None:
+        return temp 
+    l=temp.next
+    while(l):
+        if l.prev==None:
+            break
+        if l.data==l.prev.data:
+            l=delt(l)
+        else:
+            l=l.next  
+    return head      
+
