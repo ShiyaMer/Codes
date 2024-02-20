@@ -1,0 +1,37 @@
+class Node:
+    def __init__(self, data=0, next=None, prev=None):
+        self.data = data
+        self.next = next
+        self.prev = prev
+
+
+# Don't change the code above.
+
+def delt(Nod):
+    front=Nod.next
+    if front==None:
+        front=Nod.prev
+        front.next=None
+        return front
+    
+    back=Nod.prev
+    back.next=front
+    front.prev=back
+    return front
+def deleteAllOccurrences(head: Node, k: int) -> Node:
+    
+    while( head and head.data==k):
+        if head.next!=None:
+            head=head.next
+            head.prev=None 
+        else:
+            head=None
+            break
+      
+    l=head
+    while(l):
+        if l.data==k:
+            l=delt(l)
+        else:
+            l=l.next  
+    return head      
