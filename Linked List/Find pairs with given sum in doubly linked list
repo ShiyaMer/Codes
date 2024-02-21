@@ -1,0 +1,37 @@
+Brute:
+def findPairs(head: Node, k: int) -> [[int]]:
+
+    ans=[]
+    d={}
+    sum1=0
+    temp=head
+    while(temp):
+        var=temp.data
+        if (k-var) in d:
+            ans.append([k-var,var])
+        else:
+            d[var]=sum1
+        sum1+=1
+        temp=temp.next        
+            
+    return ans 
+Optimal:
+def findPairs(head: Node, k: int) -> [[int]]:
+
+    ans=[]
+    end=head
+    while(end.next!=None):
+        end=end.next
+    start=head
+    while(start.data<end.data):
+        var=start.data+end.data
+        if var ==k:
+            ans.append([start.data,end.data])
+            start=start.next
+            end=end.prev
+        elif var>k:
+            end=end.prev
+        else:
+            start=start.next      
+            
+    return ans 
