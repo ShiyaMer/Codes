@@ -1,0 +1,27 @@
+class Browser:
+    def __init__(self, homepage: str) -> None:
+        a=Node(homepage)
+        self.curr=a
+
+    def visit(self, url: str) -> None:
+        a=Node(url)
+        self.curr.next=a
+        a.prev=self.curr
+        self.curr=a
+
+    def back(self, steps: int) -> str:
+        p=self.curr
+        while(p.prev!=None and steps>0):
+            p=p.prev
+            steps=steps-1
+        self.curr=p  
+        return self.curr.data
+
+    def forward(self, steps: int) -> str:
+        p=self.curr
+        while(p.next!=None and steps>0):
+            p=p.next
+            steps=steps-1
+        self.curr=p 
+        return self.curr.data
+        
