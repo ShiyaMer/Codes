@@ -1,0 +1,65 @@
+class Node:
+    def __init__(self, val=0, next=None, child=None):
+        self.data = val
+        self.next = next
+        self.child = child
+
+def flattenLinkedList(head):
+    p = head
+    l=[]
+    while p:
+        q=p
+        while(q!=None):
+            l.append(q.data)
+            q=q.child
+        p = p.next
+    l.sort()
+    i=0
+    f=temp=None
+    while(i<len(l)):
+        if f==None:
+            temp=Node(l[i])
+            f=temp
+        else:
+            temp.child=Node(l[i])
+            temp=temp.child
+        i+=1          
+    return f
+Optimal:
+class Node:
+    def __init__(self, val=0, next=None, child=None):
+        self.data = val
+        self.next = next
+        self.child = child
+def merge(h1,h2):
+    if h1==None:
+        h2.next=None
+        return h2
+    if h2==None:
+        h1.next=None
+        return h1    
+    ans=Node(-1)
+    p=ans
+    while(h1 and h2):
+        if h1.data<h2.data:
+            p.child=h1
+            p=h1
+            h1=h1.child
+        else:
+            p.child=h2
+            p=h2
+            h2=h2.child
+        p.next=None
+    if h1:
+        p.child=h1
+    if h2:
+        p.child=h2
+    return ans.child    
+
+
+def flattenLinkedList(head):
+    if head==None or head.next==None:
+        return head
+    new_head=flattenLinkedList(head.next)
+    head=merge(head,new_head)
+    return head
