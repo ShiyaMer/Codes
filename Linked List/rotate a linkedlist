@@ -1,0 +1,72 @@
+Brute:
+class Node:
+    def __init__(self, val, next=None):
+        self.data = val
+        self.next = next
+
+
+def reversell(h1):
+    temp=h1
+    back=None
+    front=None
+    while(temp):
+        front=temp.next
+        temp.next=back
+        back=temp
+        temp=front
+    return back
+
+def rotate(head: Node, k: int) -> Node:
+    # Write your code here.
+    if head==None or head.next==None:
+        return head
+    p=head
+    n=0    
+    while(p):
+        n+=1
+        p=p.next 
+    k=k%n
+    c=1
+    temp=head
+    nexp=None
+    while(c!=n-k):
+        temp=temp.next
+        c+=1
+    nexp=temp.next
+    temp.next=None
+    head1=reversell(head)
+    head2=reversell(nexp)
+    q=head1
+    while(q.next):
+        q=q.next 
+    q.next=head2
+    head3=reversell(head1)
+    return head3      
+   
+Optimal:
+#Intuition make it a circular linked list 
+#Sever the connection after n-k node
+
+def rotate(head: Node, k: int) -> Node:
+    if head==None or head.next==None:
+        return head
+    p=head
+    n=0    
+    while(p):
+        n+=1
+        p=p.next 
+    k=k%n
+    b=q=head
+    while(q.next):
+        q=q.next
+    q.next=b    
+    c=1
+    temp=head
+    nexp=None
+    while(c!=n-k):
+        temp=temp.next
+        c+=1
+    nexp=temp.next
+    temp.next=None
+    return nexp     
+   
