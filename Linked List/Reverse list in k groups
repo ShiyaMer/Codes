@@ -1,0 +1,42 @@
+def reversell(h1):
+    temp=h1
+    back=None
+    front=None
+    while(temp):
+        front=temp.next
+        temp.next=back
+        back=temp
+        temp=front
+    return back
+def getkthnode(h2,k):
+    k-=1
+    p=h2
+    while(k>0 and p!=None):
+        p=p.next
+        k-=1    
+    return p           
+def kReverse(head, k):
+    if head==None or head.next==None:
+        return head
+    prevNode=None
+    temp=head
+    while(temp):
+        knode=getkthnode(temp,k)
+        if knode==None:#the list was either too small or remaining elemnts less than k need not be reversed
+            if prevnode:
+                prevnode.next=temp#the original list was not small,so the lsit need to be connected
+            break
+        nexp=knode.next#Store the next gruop
+        knode.next=None#Null the current gruop
+        ans=reversell(temp)
+        if temp==head:
+            head=ans#First time store new_head
+        else:
+            prevnode.next=ans #not first group so do the linking
+        prevnode=temp#store the next previous and carry forward
+        temp=nexp  
+
+    return head            
+                
+
+    
