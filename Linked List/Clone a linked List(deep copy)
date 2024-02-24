@@ -1,0 +1,63 @@
+Brute:#hashmap
+class Node:
+    def __init__(self, data=0, next=None, random=None):
+        self.data = data
+        self.next = next
+        self.random = random
+
+
+# Don't change the code above.
+
+
+def cloneLL(head: Node) -> Node:
+   
+    p=head
+    d={None:None}
+    while(p):
+        a=Node(p.data)
+        d[p]=a
+        p=p.next  
+    q=head
+    while q:
+        copy=d[q]
+        copy.next=d[q.next]
+        copy.random=d[q.random]
+        q=q.next
+    return d[head]    
+#Optimal:
+class Node:
+    def __init__(self, data=0, next=None, random=None):
+        self.data = data
+        self.next = next
+        self.random = random
+def cloneLL(head: Node) -> Node:
+    if not head:
+        return None
+    # Step 1: Create new nodes and insert them after the original nodes
+    p = head
+    while p:
+        new_node = Node(p.data)
+        new_node.next = p.next
+        p.next = new_node
+        p = new_node.next
+    
+    # Step 2: Assign random pointers for the new nodes
+    p = head
+    while p:
+        if p.random:
+            p.next.random = p.random.next
+        p = p.next.next
+    
+    # Step 3: Separate original list from the cloned list
+    p = head
+    cloned_head = head.next
+    cloned_p = cloned_head
+    
+    while p:
+        p.next = cloned_p.next
+        p = p.next
+        if p:
+            cloned_p.next = p.next
+            cloned_p = cloned_p.next
+    
+    return cloned_head
