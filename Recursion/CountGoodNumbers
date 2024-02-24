@@ -1,1 +1,46 @@
+Brute:
+class Solution(object):
+    def po(self,num,pow):
+        if pow==0:
+            return 1
+        elif pow%2==0:
+            return self.po(num,pow//2)*(self.po(num,pow//2))
+        else:
+            return  num*(self.po(num,pow//2))*(self.po(num,pow//2))
+    def countGoodNumbers(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        #2,4,6,8,0 #2,3,5,7
+        even=(n+1)//2
+        odd=n//2
+        e=self.po(5,even)
+        o=self.po(4,odd)
+        return (e*o)%(10**9 + 7)
+Optimal:
+class Solution(object):
+    def po(self,num,pow):
+        temp=0
+        if pow==0:
+            return 1
+        temp=self.po(num,pow//2)    
+        if pow%2==0:
+            return (temp*temp)%(10**9 + 7)
+        else:
+           return (temp*temp*num)%(10**9 + 7)
+    def countGoodNumbers(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        #2,4,6,8,0 #2,3,5,7
+        even=(n+1)//2
+        odd=n//2
+        e=self.po(5,even)
+        o=self.po(4,odd)
+        return (e*o)%(10**9 + 7)
 
+        
+
+        
