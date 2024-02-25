@@ -1,0 +1,14 @@
+def insertbottom(top,stack):
+    if len(stack)==0:
+        stack.append(top)
+    else:
+        tem=stack.pop()
+        insertbottom(top,stack)
+        stack.append(tem)
+            
+def reverseStack(stack: List[int]) -> None:
+    if len(stack)>1:
+        top=stack.pop()
+        reverseStack(stack)
+        insertbottom(top,stack)
+    return stack  
