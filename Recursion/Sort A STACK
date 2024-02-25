@@ -1,0 +1,14 @@
+def insertsort(top,s):
+    if  len(s)==0 or top>s[-1]:
+        s.append(top)
+    else:
+        temp=s.pop()
+        insertsort(top,s)
+        s.append(temp)
+
+def sortStack(s):
+    if len(s)>1:
+        top=s.pop()
+        sortStack(s)
+        insertsort(top,s)
+    return s 
