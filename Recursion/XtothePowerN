@@ -1,0 +1,32 @@
+Recursive soln:
+def myPow(x: float, n: int) -> float:
+    # Write your code here
+    if n==0:
+        return 1
+    if n<0:
+        x=(1/x)
+        n=(-1)*n
+    temp=myPow(x,n//2)
+    if n%2==0:
+        return temp*temp
+    else:
+        return x*temp*temp
+Iterative:
+def myPow(x: float, n: int) -> float:
+    # Write your code here
+    sign=0
+    if n<0:
+        sign=-1
+    n=abs(n)
+    ans=1
+    while(n):
+        if n%2==1:
+            ans=ans*x
+        x=x*x
+        n=n//2
+    if  sign==-1:
+        return (1/ans) 
+    else:
+        return ans        
+
+    pass
