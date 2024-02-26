@@ -1,0 +1,24 @@
+def helper(s,i,n):
+    ans=""
+    if i>=n or not s[i].isdigit():
+        return ans
+    ans+=s[i]     
+    return ans+helper(s,i+1,n)  
+
+def createAtoi(s: str) -> int:
+    i=0
+    sign=1
+    while(i<len(s) and s[i]==' '):
+        i+=1
+    if i<len(s) and (s[i]=='-' or s[i]=='+'):
+        sign=-1 if s[i]=='-'else 1
+        i+=1
+    ans=helper(s,i,len(s))
+    if ans=="":
+        return 0
+    ans=int(ans)*sign
+        
+    INT_MAX = 2**31 - 1
+    INT_MIN = -2**31
+    ans = max(INT_MIN, min(INT_MAX,ans))
+    return ans
