@@ -1,0 +1,16 @@
+from typing import List
+def helper(i,n,s):
+    if len(i)==n:
+        s.append(i)
+        return
+    if i[len(i)-1]=='1':
+        helper(i+'0',n,s)
+    elif i[len(i)-1]=='0':
+        helper(i+'0',n,s)
+        helper(i+'1',n,s)
+
+def generateString(N: int) -> List[str]:
+    s=[]
+    helper('0',N,s)
+    helper('1',N,s)
+    return s
