@@ -1,0 +1,43 @@
+Brute:
+def valid(s):
+    stack=[]
+    for i in s:
+        if i=='(':
+            stack.append(i) 
+        elif i==')' and len(stack)!=0:
+            stack.pop() 
+        else:
+            return 0
+    if len(stack)==0:
+        return 1
+    else:
+        return 0                      
+def generate(i,n,l):
+    if len(i)==2*n:
+        if valid(i):
+            l.append(i)
+        return
+    generate(i+')',n,l)
+    generate(i+'(',n,l)
+ 
+def validParenthesis(n: int) -> int:
+    l=[]
+    generate('(',n,l)
+    generate(')',n,l)
+    return l
+Best:
+                     
+def generate(i,n,l,left,right):
+    if len(i)==2*n:
+        l.append(i)
+        return
+    if right>left:
+        return
+    if left<n:
+        generate(i+'(',n,l,left+1,right)
+    generate(i+')',n,l,left,right+1)
+ 
+def validParenthesis(n: int) -> int:
+    l=[]
+    generate('(',n,l,1,0)
+    return l
