@@ -1,0 +1,14 @@
+from typing import List
+def helper(l,s,i):
+    if len(s)==0:
+        l.append(i)
+        return
+    helper(l,s[1:],i) 
+    helper(l, s[1:], i+s[0])   
+#pick non pick method
+
+    
+def generateSubsequences(s:str) -> List[str]:
+    l=[]
+    helper(l,s,"")
+    return l
