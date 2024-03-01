@@ -1,0 +1,19 @@
+#remove the existing sequences   whenr epeated c haracters arrive 
+def func(a,n):
+    count=1
+    d={}
+    for i in a:
+        if i not in d:
+            d[i]=count
+            count*=2
+        else:
+            temp=d[i]
+            d[i]=count
+            count*=2  
+            count-= temp
+    return count     
+def moreSubsequence(n: int, m: int, a: str, b:str) -> str:
+    if func(a, n) >= func(b, m):
+        return a
+    else:
+        return b
