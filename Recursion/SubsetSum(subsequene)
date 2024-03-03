@@ -1,0 +1,33 @@
+Brute check all subsequence:
+def helper(a,k,sum1):
+    if sum1==k:
+        return  True  
+    if len(a)==0:
+        return    
+    elif sum1>k:
+        return
+    else: 
+        return helper(a[1:],k,sum1)or helper(a[1:],k,sum1+a[0]) 
+       
+def isSubsetPresent(n:int, k: int, a: List[int]) -> bool:
+    return helper(a,k,0)
+Better check one if true return:
+def helper(s,e,a,k,l,sum1):
+    if s==e :
+        if sum1==k:
+            return True  
+        return  False   
+    elif sum1>k:
+        return  False
+    l.append(a[s])    
+    sum1+=a[s]  
+    if helper(s+1,e,a,k,l,sum1)==True:
+        return  True
+    l.remove(a[s])  
+    sum1-=a[s]  
+    if helper(s+1,e,a,k,l,sum1)==True:
+        return  True
+    return False    
+       
+def isSubsetPresent(n:int, k: int, a: List[int]) -> bool:
+    return helper(0,len(a),a,k,[],0)
