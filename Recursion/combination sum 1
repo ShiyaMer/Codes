@@ -1,0 +1,16 @@
+def func(s,l,arr,b,k):
+	if s==len(arr):
+		if b==0:
+			k.append(l[:])
+		return
+	if arr[s]<=b:
+		l.append(arr[s])
+		func(s,l,arr,b-arr[s],k)
+		l.remove(arr[s])
+	func(s+1,l,arr,b,k)			
+
+def combSum(ARR, B):
+	arr=sorted(ARR)
+	k=[]
+	func(0,[],arr,B,k)
+	return k
