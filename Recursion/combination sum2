@@ -1,0 +1,43 @@
+Brute:
+def helper(i, k, l, arr, n, target):
+    if i == n:
+        if target == 0 and k not in l:
+            l.append(k[:])
+        return
+    
+    # Include the current element and proceed
+    if arr[i] <= target:
+        k.append(arr[i])
+        helper(i + 1, k, l, arr, n, target - arr[i])
+        k.pop()
+    helper(i + 1, k, l, arr, n, target)
+
+def combinationSum2(arr: List[int], n: int, target: int) -> List[List[int]]:
+    l = []
+    arr.sort()
+    helper(0, [], l, arr, n, target)
+    return l
+
+
+Better:
+def helper(i, k, l, arr, n, target):
+    if target == 0:
+        l.append(k[:])
+        return
+    
+    for j in range(i,n):
+        if j>i and arr[j]==arr[j-1]:#to avoid duplicates the same elemnrts get avoided
+           continue
+        if arr[j]>target:
+            break
+        k.append(arr[j])
+        helper(j + 1, k, l, arr, n, target - arr[j])
+        k.pop()
+    
+def combinationSum2(arr: List[int], n: int, target: int) -> List[List[int]]:
+    l = []
+    arr.sort()
+    helper(0, [], l, arr, n, target)
+    return l
+
+
