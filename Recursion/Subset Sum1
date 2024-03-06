@@ -1,0 +1,17 @@
+from typing import List
+
+
+def helper(i,l,num,sum1):
+    if i==len(num):
+        l.append(sum1)
+        return
+    helper(i+1,l,num,sum1)
+    helper(i+1,l,num,sum1+num[i])
+   
+
+
+def subsetSum(num: List[int]) -> List[int]:
+    l=[]
+    helper(0,l,num,0)
+    l.sort()
+    return l
