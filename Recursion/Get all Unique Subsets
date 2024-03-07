@@ -1,0 +1,15 @@
+class Solution:
+    def helper(self,i,l,k,nums):
+        l.append(k[:])
+        if i==len(nums):
+            return
+        for j in range(i,len(nums)):
+            if j>i and nums[j]==nums[j-1]:
+                continue
+            k.append(nums[j])
+            self.helper(j+1,l,k,nums)
+            k.pop()        
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        l=[]
+        self.helper(0,l,[],nums)
+        return l 
