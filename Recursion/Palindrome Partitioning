@@ -1,0 +1,27 @@
+from typing import List
+def ischeckpali(s):
+    if len(s)==1:
+        return True
+    j=len(s)-1
+    i=0  
+    while(i<=j):
+        if s[i]!=s[j]:
+            return False
+        i+=1
+        j-=1
+    return True 
+def helper(i,l,s,tem):
+    if i==len(s):
+        l.append(tem[:])
+        return
+    for j in range(i+1,len(s)+1):
+        if ischeckpali(s[i:j]):
+            tem.append(s[i:j])
+            helper(j,l,s,tem)  
+            tem.pop()  
+    
+        
+def partition(string: str) -> List[List[str]]:
+    l=[]
+    helper(0,l,string,[])
+    return l
