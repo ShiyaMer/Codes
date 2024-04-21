@@ -26,4 +26,17 @@ def countPrimes(n: int) -> int:
     if n!=1:
         count.append(n)            
                
-    return count            
+    return count
+    Further Optimal:Sieve of Erasthones
+    def countPrimes(n: int) -> int:
+    pr=[1]*(n+1)
+    pr[0]=0
+    pr[1]=0
+    l=[]
+    for i in range(2,n):
+       if pr[i]==1:
+            if n%i==0:
+               l.append(i)
+            for j in range(i*i,n,i):
+                pr[j]=0
+    return   l       
