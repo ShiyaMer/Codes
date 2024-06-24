@@ -1,0 +1,21 @@
+def buildTree(self, preorder, inorder):
+        """
+        :type preorder: List[int]
+        :type inorder: List[int]
+        :rtype: TreeNode
+        """
+        d={}
+        for i in range(len(inorder)):
+            d[inorder[i]]=i
+        def help(pre,ino,d,ps,pe,ins,ine):
+            if ps>ps or ins>ine:
+                return 
+            root=TreeNode(pre[ps])
+            inorder_index=d[pre[ps]]
+            numbers_left=inorder_index-ins
+            #for left start should the next elemnt to be root and end the number of elemnts to consider
+            #indorder window of elmnts to consider
+            root.left=help(pre,ino,d,ps+1,ps+numbers_left,ins,inorder_index-1)  
+            root.right=help(pre,ino,d,ps+numbers_left+1,pe,inorder_index+1,ine)
+            return root
+        return help(preorder,inorder,d,0,len(inorder)-1,0,len(inorder)-1)    
