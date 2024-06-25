@@ -1,0 +1,68 @@
+#Recursive:
+#Almost a post order traversal
+#
+class Solution:
+    
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        #recursive approach Go towards right make left null and right =prev
+        prev=None
+        def help(cur):
+            nonlocal prev
+            if not cur:
+                return None
+            help(cur.right)
+            help(cur.left)
+            cur.right=prev
+            cur.left=None
+            prev=cur 
+        help(root)
+ #Iterative:
+ #uses stck assign push right then left then assign root.right =left and continue
+ class Solution:
+    
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        #recursive approach Go towards right make left null and right =prev
+        if not root:
+            return
+        stack=[root]
+        while(stack):
+            node=stack.pop()
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+            if stack:
+                node.right=stack[-1]
+            node.left=None
+
+        return root
+#Morris
+  class Solution:
+    
+    def flatten(self, root: Optional[TreeNode]) -> None:
+        """
+        Do not return anything, modify root in-place instead.
+        """
+        #recursive approach Go towards right make left null and right =prev
+        if not root:
+            return
+        cur=root
+        while(cur):
+            if cur.left:
+                prev=cur.left
+                while(prev.right):
+                    prev=prev.right
+                prev.right=cur.right
+                cur.right=cur.left
+                cur.left=None
+            cur=cur.right        
+
+        return root      
+        
+        
