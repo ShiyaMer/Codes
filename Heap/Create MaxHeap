@@ -1,0 +1,50 @@
+class Maxheap:
+    def __init__(self):
+        self.arr=[0]*(10**3+1)
+        self.size=0
+        self.arr[0]=float('inf')
+    def parent(self,i):
+        return i//2
+    def leftchild(self,i):
+        return 2*i
+    def rightchild(self,i):
+        return ((2*i)+1)
+    def isleaf(self,i):
+        if i>=self.size//2 and i<=self.size:
+            return True
+        return False    
+    def heapify(self,i):
+        if not self.isleaf(i):
+            largest=i
+            left=self.leftchild(i)
+            right=self.rightchild(i)
+            if left<=self.size and self.arr[left]>self.arr[i]:
+                largest=left
+            if right<=self.size and self.arr[largest]<self.arr[right]:
+                largest=right
+            if largest!=i:
+                self.arr[largest],self.arr[i]=self.arr[i],self.arr[largest]
+                self.heapify(largest)  
+    def insert(self,ele):
+        if self.size>=10**3:
+            return 
+        self.size+=1
+        self.arr[self.size]=ele
+        child=self.size
+        while(self.arr[child]>self.arr[self.parent(child)]):
+            self.arr[child],self.arr[self.parent(child)]=self.arr[self.parent(child)],self.arr[child]
+            child=self.parent(child)
+            
+    def extractmax(self):
+        if self.size==0:
+           return
+        maxi=self.arr[1]
+        self.arr[1] = self.arr[self.size]
+        self.size-=1
+        self.heapify(1)
+        return maxi
+  
+    def getmax(self):
+        if self.size==1:
+            return
+        return self.arr[1]
