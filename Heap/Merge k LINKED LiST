@@ -1,0 +1,14 @@
+from heapq import heappush,heappop
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        heap=[]
+        for l in lists:
+            while(l):
+                heappush(heap,l.val)
+                l=l.next
+        head=ListNode(-1)
+        cur=head
+        while(heap):
+            cur.next=ListNode(heappop(heap))   
+            cur=cur.next
+        return head.next  
